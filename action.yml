@@ -1,0 +1,20 @@
+name: 'Compliance Framework Agent'
+description: 'Run the Compliance Framework Agent to check policies'
+author: 'Compliance Framework'
+inputs:
+  api_url:
+    description: 'The URL of the Compliance Framework API'
+    required: true
+  plugins:
+    description: 'YAML configuration for plugins (will be indented automatically)'
+    required: true
+  verbosity:
+    description: 'Verbosity level (0-2)'
+    required: false
+    default: '0'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'shield'
+  color: 'blue'
