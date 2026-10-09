@@ -1,0 +1,2 @@
+lisa-selfreview:
+- pass 1 (approve): no blocking findings. Question (not fixed, listed in the PR body): repo-settings squash-merges with PR_TITLE, so the `fix(deps)` agent pin would be squashed under this PR's `ci:` title and release nothing. The PR body carries a BEGIN_COMMIT_OVERRIDE block (fix(deps) + ci) so release-please still sees the fix; reviewers can drop it if they prefer a separate release trigger.
