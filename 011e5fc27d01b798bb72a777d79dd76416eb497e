@@ -1,0 +1,3 @@
+lisa-design:
+- release-please-config.json is mock-agent-action's config (the shared defaults verbatim, so the drift check passes) plus bootstrap-sha e4c672ae (current main = the v0.0.1 tag commit), release-type simple; manifest and version.txt seeded at 0.0.1 per the T02 table.
+- release-please.yml and the release-checks job are copied from mock-agent-action, re-pinned at workflows 55c549bf # v1.4.0. The workflow reads ccf-release-bot secrets from the repo's `release` environment, so repo-settings must be applied before this PR merges.
