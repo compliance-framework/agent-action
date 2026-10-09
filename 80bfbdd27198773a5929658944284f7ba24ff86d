@@ -1,0 +1,4 @@
+lisa-design:
+- ci.yml copies mock-agent-action's caller (triggers incl. closed, permissions, secrets: inherit), pinned at workflows 55c549bf # v1.4.0 (coordinator update over the spec's v1.3.2). release-checks is added in T02, as in the gooci pilot.
+- No old CI to remove: agent-action had no workflow files on main (release-please.yml was deleted in e4c672a).
+- hadolint fix kept minimal: --no-install-recommends (verified same 91 dpkg packages before/after) plus an inline `hadolint ignore=DL3008` rather than pinning a Debian package version that would break on base image updates or adding a repo-wide .hadolint.yaml.
