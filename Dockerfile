@@ -1,8 +1,6 @@
-# Stage 1: Get the binary from the upstream agent image
-# We use the 'latest' tag or a specific version if needed. 
-# Since the user didn't specify, we'll assume we want to pull the latest available image or specific tag.
-# Ideally we should pin this, but for this task "already available" implies latest or a known tag.
-FROM ghcr.io/compliance-framework/agent:0.2 AS source
+# Stage 1: Get the binary from the upstream agent image, pinned to an agent release.
+# ccf-bump rewrites this line when compliance-framework/agent releases.
+FROM ghcr.io/compliance-framework/agent:0.9.0 AS source
 
 # Stage 2: Final image with shell
 FROM debian:bookworm-slim
