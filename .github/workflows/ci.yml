@@ -1,0 +1,33 @@
+# Shared action CI from compliance-framework/workflows (hadolint, docker build, actionlint,
+# PR title and osv-scanner), pinned to a release commit that ccf-bump moves. The status check
+# to require is `ci / required`.
+name: ci
+
+on:
+  pull_request:
+    # closed: notify marks the PR's needs-human card handled and closes its CI incident.
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled, closed]
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  ci:
+    uses: compliance-framework/workflows/.github/workflows/ci-action.yml@55c549bf712163152173b398e297fba0f907ceca # v1.4.0
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+      security-events: write
+    secrets: inherit
+
+  notify:
+    needs: [ci]
+    if: always()
+    uses: compliance-framework/workflows/.github/workflows/notify-failure.yml@55c549bf712163152173b398e297fba0f907ceca # v1.4.0
+    with:
+      needs: ${{ toJSON(needs) }}
+    permissions:
+      contents: read
+    secrets: inherit

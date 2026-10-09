@@ -7,8 +7,10 @@ FROM ghcr.io/compliance-framework/agent:0.2 AS source
 # Stage 2: Final image with shell
 FROM debian:bookworm-slim
 
-# Install ca-certificates for SSL connections
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+# Install ca-certificates for SSL connections. The package version follows the base image
+# (DL3008 ignored), and it has no recommended packages to skip.
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copy binary from the source stage
 COPY --from=source /app/concom /usr/local/bin/concom
