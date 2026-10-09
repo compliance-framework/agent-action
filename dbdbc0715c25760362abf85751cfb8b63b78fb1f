@@ -1,0 +1,3 @@
+lisa-design:
+- The Dockerfile pin (agent:0.2 -> agent:0.9.0) is its own first commit, `fix(deps): ...`, like helm's appVersion fix: it is the user-visible change that should make release-please propose 0.0.2 and, on the final release, create the floating v0 tag the README already advertises. The FROM line keeps the `FROM ghcr.io/compliance-framework/agent:<ver> AS source` shape that ccf-bump's dockerfile updater matches.
+- Verified the 0.9.0 binary still accepts the entrypoint's `concom agent --config /config.yaml` and the generated config (reaches plugin download), same as 0.2.
