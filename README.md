@@ -67,3 +67,22 @@ This action:
 1.  Takes your inputs and generates a `config.yaml` file on the fly.
 2.  Ensures the agent runs in non-daemon mode (`daemon: false`).
 3.  Executes the agent inside a Docker container to perform the compliance checks.
+
+## Versions and releases
+
+Pin the action to the floating major tag (`@v0`) to get every compatible release, or to an exact
+release tag (`@vX.Y.Z`) to stay on one. Release tags are `vX.Y.Z`, and release candidates are
+`vX.Y.Z-rcN`. The action's `Dockerfile` copies the agent from a pinned
+`ghcr.io/compliance-framework/agent` release, which `ccf-bump` updates.
+
+Releases are automated with workflows from
+[compliance-framework/workflows](https://github.com/compliance-framework/workflows):
+
+- `release-please.yml` keeps a release PR open on `main` that bumps `version.txt` and
+  `CHANGELOG.md`. Merging it tags `vX.Y.Z` and publishes the GitHub release.
+- `release.yml` runs on each published release. A final `vX.Y.Z` moves the `v<X>` tag (`v0`)
+  to it; a release candidate moves nothing.
+- `cut-prerelease.yml` (run by hand) tags `vX.Y.Z-rcN` on `main` with the next version from the
+  open release PR and publishes it as a pre-release, so `@vX.Y.Z-rcN` can be tried first.
+
+Release tags are created only by the release bot, never pushed by hand.
