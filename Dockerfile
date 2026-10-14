@@ -1,6 +1,6 @@
 # Stage 1: Get the binary from the upstream agent image, pinned to an agent release.
 # ccf-bump rewrites this line when compliance-framework/agent releases.
-FROM ghcr.io/compliance-framework/agent:0.9.1 AS source
+FROM ghcr.io/compliance-framework/agent:0.9.2 AS source
 
 # Stage 2: Final image with shell
 FROM debian:bookworm-slim
