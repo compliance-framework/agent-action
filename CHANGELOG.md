@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/compliance-framework/agent-action/compare/v0.0.3...v0.0.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump agent to v0.9.3, workflows to v1.7.0 ([#11](https://github.com/compliance-framework/agent-action/issues/11)) ([26f4daa](https://github.com/compliance-framework/agent-action/commit/26f4daa73f253daf345efa0722ce381b9061b098))
+
 ## [0.0.3](https://github.com/compliance-framework/agent-action/compare/v0.0.2...v0.0.3) (2026-10-14)
 
 
