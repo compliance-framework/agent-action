@@ -1,0 +1,2 @@
+lisa-addressed:
+- ccf-review CORE-STYLE-001 nit: ci.yml header now names the image check and says it gates nothing.
