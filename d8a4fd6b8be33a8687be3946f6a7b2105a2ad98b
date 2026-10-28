@@ -1,0 +1,3 @@
+lisa-design:
+- No input change: ci-action.yml builds the image check's list from its existing dockerfile/context inputs (defaults Dockerfile and .), which match this repo.
+- CHANGELOG.md's v1.7.0 line is release history and stays as is.
