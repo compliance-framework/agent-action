@@ -3,7 +3,7 @@
 FROM ghcr.io/compliance-framework/agent:0.9.4 AS source
 
 # Stage 2: Final image with shell
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3
 
 # Install ca-certificates for SSL connections. The package version follows the base image
 # (DL3008 ignored), and it has no recommended packages to skip.
