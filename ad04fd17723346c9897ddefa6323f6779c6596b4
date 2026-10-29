@@ -1,0 +1,6 @@
+lisa-design:
+- Base is gcr.io/distroless/base-debian13:debug (pinned by digest), not static-debian13:debug: agent 0.9.4's concom is dynamically linked to glibc; static only works once agent ships a CGO_ENABLED=0 binary (then static-debian13:debug scans with 0 HIGH/CRITICAL, 85 MB).
+- Not distroless/base-debian12:debug: it currently carries 5 fixable HIGH/CRITICAL (libc6/libssl3) that bookworm-slim does not.
+- Not debian:trixie-slim: works too, but 68 unfixable OS HIGH/CRITICAL and 200 MB vs 7 and 117 MB.
+- entrypoint.sh keeps a portable #!/bin/sh shebang (shellcheck checks it as sh); the Dockerfile invokes /busybox/sh explicitly because the image has no /bin/sh.
+- Trade-off: no package manager, so OS fixes arrive only with a newer distroless digest (Renovate), not an apt patch.
