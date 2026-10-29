@@ -1,0 +1,2 @@
+lisa-design:
+Final image is gcr.io/distroless/static-debian13:debug: concom (agent >= 0.9.5) and all CCF plugins are CGO_ENABLED=0 static binaries, so no libc is needed. Busybox sh entrypoint kept. If a future agent release ships a dynamically linked concom, the action fails with "concom: not found" — the base must go back to base-debian13 in that case.
