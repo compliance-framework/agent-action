@@ -8,11 +8,11 @@ We will build a GitHub Action that wraps the `ghcr.io/compliance-framework/agent
     *   **Challenge**: The upstream image `ghcr.io/compliance-framework/agent` uses `gcr.io/distroless/base-debian12`, which does not contain a shell (`sh` or `bash`). This prevents us from running an `entrypoint.sh` script directly if we just `FROM` it.
     *   **Solution**: Use a multi-stage build.
         *   Stage 1 (`source`): `FROM ghcr.io/compliance-framework/agent` to get the binary.
-        *   Stage 2 (`final`): `FROM debian:bookworm-slim` (contains `bash` and standard tools).
+        *   Stage 2 (`final`): `FROM gcr.io/distroless/base-debian13:debug` (glibc for the agent binary, CA certificates, and a busybox `sh` at `/busybox/sh`; no package manager).
         *   Copy the `/app/concom` binary from `source` to `final`.
-        *   Install `ca-certificates` (required for API calls).
+        *   CA certificates (required for API calls) come with the base image.
         *   Add `entrypoint.sh`.
-    *   Sets `ENTRYPOINT` to `entrypoint.sh`.
+    *   Sets `ENTRYPOINT` to `/busybox/sh /entrypoint.sh` (the base image has no `/bin/sh`).
 
 2.  **`entrypoint.sh`**
     *   **Purpose**: Generate the agent configuration file (`config.yaml`) from Action inputs and run the agent.
