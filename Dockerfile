@@ -2,19 +2,15 @@
 # ccf-bump rewrites this line when compliance-framework/agent releases.
 FROM ghcr.io/compliance-framework/agent:0.9.4 AS source
 
-# Stage 2: Final image with shell
-FROM debian:bookworm-slim@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3
-
-# Install ca-certificates for SSL connections. The package version follows the base image
-# (DL3008 ignored), and it has no recommended packages to skip.
-# hadolint ignore=DL3008
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+# Stage 2: Final image. Distroless Debian 13 with glibc (the agent binary is dynamically linked),
+# CA certificates for the API and registry calls, and the busybox shell of the debug tag for
+# entrypoint.sh. No package manager and no other userland.
+FROM gcr.io/distroless/base-debian13:debug@sha256:864c3a9f9e4718b65712bbf0ebc2c1a001ff1a3c3b80cece822532d8dc67b0bf
 
 # Copy binary from the source stage
 COPY --from=source /app/concom /usr/local/bin/concom
 
-# Copy entrypoint
+# Copy entrypoint. The image has no /bin/sh: busybox's sh runs it.
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/busybox/sh", "/entrypoint.sh"]
