@@ -4,3 +4,7 @@ lisa-design:
 - Not debian:trixie-slim: works too, but 68 unfixable OS HIGH/CRITICAL and 200 MB vs 7 and 117 MB.
 - entrypoint.sh keeps a portable #!/bin/sh shebang (shellcheck checks it as sh); the Dockerfile invokes /busybox/sh explicitly because the image has no /bin/sh.
 - Trade-off: no package manager, so OS fixes arrive only with a newer distroless digest (Renovate), not an apt patch.
+
+lisa-selfreview:
+pass 1 (strict): verdict approve. Checked CORE-VERIFY-001 (docker build, hadolint v2.12.0, shellcheck v0.10.0 clean; image runs entrypoint.sh, downloads and starts plugin-local-ssh via TLS; missing-input errors unchanged; config.yaml byte-identical to bash for inputs with backslashes, $, backticks, leading -e), CORE-DOC-001 (PLAN.md updated; README names no base), CORE-SEC-003 (entrypoint unchanged apart from shebang).
+Question (CORE-REL-001, unclear): plugins that shell out to bash or OS tools inside the action container stop working, e.g. plugin-apt-versions runs `bash -c dpkg-query` (in the action it only ever inventoried the action container's own packages, and it already fails in the agent image, which is distroless). Is that a supported use of the action? If yes, mark breaking.
