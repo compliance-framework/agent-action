@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.5](https://github.com/compliance-framework/agent-action/compare/v0.0.4...v0.0.5) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deps:** bump agent to v0.9.5 ([#19](https://github.com/compliance-framework/agent-action/issues/19)) ([7df9834](https://github.com/compliance-framework/agent-action/commit/7df9834072b4b4fa505b847e382d789866443d6f))
+* **deps:** bump agent to v0.9.6 ([#22](https://github.com/compliance-framework/agent-action/issues/22)) ([0133f90](https://github.com/compliance-framework/agent-action/commit/0133f90bac4691b9c87921f7c7a8b55834aa3964))
+* **docker:** run the action on distroless base-debian13:debug instead of bookworm-slim ([#17](https://github.com/compliance-framework/agent-action/issues/17)) ([4c97132](https://github.com/compliance-framework/agent-action/commit/4c97132de011bfa3fcbcceb289c0f937055d0b4a))
+* **docker:** run the action on distroless/static now that concom is static ([#20](https://github.com/compliance-framework/agent-action/issues/20)) ([5e642cc](https://github.com/compliance-framework/agent-action/commit/5e642cc488c7267e8808fe6440d6d63ef8e2b14f))
+
 ## [0.0.4](https://github.com/compliance-framework/agent-action/compare/v0.0.3...v0.0.4) (2026-10-28)
 
 
