@@ -6,7 +6,7 @@ FROM ghcr.io/compliance-framework/agent:0.9.6 AS source
 # calls and the busybox shell of the debug tag for entrypoint.sh. No glibc, package manager or
 # other userland. No libc is needed: concom is built with CGO_ENABLED=0 (statically linked,
 # agent >= 0.9.5), and the plugins it downloads and runs are CGO_ENABLED=0 static binaries too.
-FROM gcr.io/distroless/static-debian13:debug@sha256:63b4c0065ff7bd68753510400b2d5cedd5d5571d15eac4be0b6b0dd236a2d148
+FROM gcr.io/distroless/static-debian13:debug@sha256:ebd32759877244c6e72c1610b6fb1cd1004625cc575361ee2ae0b79df9eb3893
 
 # Copy binary from the source stage
 COPY --from=source /app/concom /usr/local/bin/concom
